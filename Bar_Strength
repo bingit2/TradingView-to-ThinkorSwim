@@ -1,0 +1,16 @@
+# Bar Strength Indicator
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/Qhra09wu-Bar-Strength-Indicator/
+
+declare lower;
+
+input length = 5;
+def barstr = absValue((open - close) / (high - low) * 100);
+def brema = ExpAverage(barstr, length);
+
+plot histogram = barstr;
+plot line = brema;
+
+histogram.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+histogram.SetLineWeight(3);
+line.SetDefaultColor(GetColor(8));

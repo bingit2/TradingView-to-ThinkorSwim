@@ -1,0 +1,21 @@
+# Boring and Explosive Candles
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/g4AawPBu-Boring-and-Explosive-Candles-Pavan-Ghai/
+
+# Boring Candles
+input BcB_Ratio = 50;
+def C2BR = (AbsValue(open - close) * 100 / AbsValue(high - low));
+def Boring = C2BR <= BcB_Ratio;
+
+# Explosive Candles
+input mp = 2.0;
+input ratio = 50;
+input cand = 100;
+
+def range = atr(cand);
+def candr = AbsValue(high - low);
+def bodyr = AbsValue(open - close);
+
+def explosive = (bodyr / candr) >= ratio / 100 and candr>=(range* mp);
+
+assignPriceColor(if boring then Color.MAGENTA else if explosive then Color.CYAN else color.white);

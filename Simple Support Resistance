@@ -1,0 +1,17 @@
+# Simple Support Resistance
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/S9WdkK0z/
+
+input pd = 60;
+input yuzde = 5;
+def k1 = highest(high, pd);
+def k2 = lowest(low, pd);
+
+def resistance = k1;
+def support = k2;
+
+plot upper = resistance;
+plot lower = support;
+
+upper.SetDefaultColor(Color.RED);
+lower.SetDefaultColor(Color.GREEN);

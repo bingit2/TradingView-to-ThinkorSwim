@@ -1,0 +1,16 @@
+# Assassin Bias
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/1vpuGriu-Assassin-Bias/
+
+declare lower;
+
+input n = 120;
+
+def bias = (close - expAverage(close, n)) / expAverage(close, n) * 100;
+
+plot histogram = bias;
+plot ZeroLine = 0;
+
+histogram.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+histogram.assignValueColor(if bias > 0 then Color.green else Color.red);
+ZeroLine.AssignValueColor(Color.magenta);

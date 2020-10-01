@@ -1,0 +1,10 @@
+# 50% body candle for ThinkorSwim
+# Converted by BenTen at useThinkScript.com
+# Original script https://www.tradingview.com/script/flJRfJ7E-50-body-candle/
+
+
+def candr = high - low;
+def bodyr = open - close;
+def borat = bodyr * 100 / candr;
+
+AssignPriceColor(if borat>-50 and borat <50 then Color.WHITE else Color.CURRENT);

@@ -1,0 +1,24 @@
+# Pretty Good Oscillator
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/fdN71ozY-Pretty-Good-Oscillator/
+
+declare lower;
+
+input length = 14;
+input upperLevel = 2.0;
+input lowerLevel = -2.0;
+input maxLevel = 4.0;
+input minLevel = -4.0;
+input src = close;
+
+def pgo = (src - simpleMovingAvg(src, length)) / atr(length);
+
+plot line = pgo;
+plot upper = upperLevel;
+plot lower = lowerLevel;
+plot max = maxLevel;
+plot min = minLevel;
+
+addCloud(upper, max, color.white, color.white);
+addCloud(lower, min, color.white, color.white);
+line.AssignValueColor(if line >= 2 then color.red else if line <= -2 then color.green else color.gray);

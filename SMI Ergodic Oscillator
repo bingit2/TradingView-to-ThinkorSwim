@@ -1,0 +1,31 @@
+# SMI Ergodic Oscillator
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/Xh5Q0une-SMI-Ergodic-Oscillator/
+
+declare lower;
+
+input fastPeriod = 4;
+input slowPeriod = 8;
+input SmthLen = 3;
+input TopBand = 0.5;
+input LowBand = -0.5;
+input xPrice = close;
+
+plot top_l = TopBand;
+plot low_l = LowBand;
+
+def xPrice1 = xPrice - xPrice[1];
+def xPrice2 = absValue(xPrice - xPrice[1]);
+def xSMA_R = expAverage(expAverage(xPrice1, fastPeriod), slowPeriod);
+def xSMA_aR = expAverage(expAverage(xPrice2, fastPeriod), slowPeriod);
+def xSMI = xSMA_R / xSMA_aR;
+def xEMA_SMI = expAverage(xSMI, SmthLen);
+
+plot green_line = xSMI;
+plot red_line = xEMA_SMI;
+
+green_line.AssignValueColor(Color.green);
+red_line.AssignValueColor(color.red);
+
+low_l.AssignValueColor(Color.green);
+top_l.AssignValueColor(color.red);

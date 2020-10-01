@@ -1,0 +1,22 @@
+# Traded Range & True ATR
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/DavBG1YU-Traded-Range-True-ATR/
+
+declare lower;
+
+input rangema = 21;
+def true_range = high - low;
+def true_ATR = simpleMovingAvg(true_range, rangema);
+
+plot histogram = true_range;
+# The current trade period range
+plot trueATR = true_ATR;
+# traded range
+plot magentaLine = true_ATR * .618; # 61.8% of trueATR value
+
+histogram.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+histogram.SetLineWeight(3);
+histogram.SetDefaultColor(GetColor(9));
+
+trueATR.SetDefaultColor(GetColor(1));
+magentaLine.SetDefaultColor(GetColor(0));

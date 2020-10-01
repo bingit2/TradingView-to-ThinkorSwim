@@ -1,0 +1,20 @@
+# Triple Keltner Channels Bands
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/NKx793Vo/
+
+input length = 20;
+input mult = 1.5;
+input src = close;
+def ma = expAverage(src, length);
+
+def KTop1 = ma + 1 * atr(10);
+def KBot1 = ma - 1 * atr(10);
+def KTop2 = ma + 2 * atr(10);
+def KBot2 = ma - 2 * atr(10);
+def KTop3 = ma + 3 * atr(10);
+def KBot3 = ma - 3 * atr(10);
+
+plot moving_average = ma;
+addCloud(KTop1, KBot1, color.green, color.green);
+addCloud(KTop2, KBot2, color.red, color.red);
+addCloud(KTop3, KBot3, color.white, color.white);

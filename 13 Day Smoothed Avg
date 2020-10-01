@@ -1,0 +1,19 @@
+# 13 Day Smoothed Moving Average
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/GTXMwzZe/
+
+def p8 = (high[8] + low[8]) / 2;
+def p7 = (high[7] + low[7]) / 2;
+def p6 = (high[6] + low[6]) / 2;
+def p5 = (high[5] + low[5]) / 2;
+def p4 = (high[4] + low[4]) / 2;
+def p3 = (high[3] + low[3]) / 2;
+def p2 = (high[2] + low[2]) / 2;
+def p1 = (high[1] + low[1]) / 2;
+def p0 = (high + low) / 2;
+
+def PrevSum= p8+p7+p6+p5+p4+p3+p2+p1;
+def PrevAve = PrevSum / 8;
+def BlueLine = (PrevSum[5] - PrevAve[5] + p0[5]) / 8;
+
+plot Blue = BlueLine;

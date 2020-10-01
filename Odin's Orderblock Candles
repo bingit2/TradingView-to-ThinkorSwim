@@ -1,0 +1,37 @@
+# Odin's Orderblock Candles
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/ccGgqVoa-Odin-s-Orderblock-Candles/
+
+def highwick = high > high[1];
+def lowwick = low < low[1];
+def insideclose = close < high[1] and close> low[1];
+def bigrange = (high - low) > 2 * (high[1] - low[1]);
+def engulf = absValue(open[1] - close[1]) < absValue(open - close);
+def orderblock = highwick and lowwick and insideclose and bigrange;
+def keyorderblock = orderblock[1] and engulf;
+
+assignPriceColor(if keyorderblock then color.yellow else color.white);
+
+# Start Zone Highlighter
+# Code adopted from Larthomp's 'Big Bar Breakout' indicator
+input limit_cloud_length = no;
+input cloud_length = 10;
+# partially end default zones settings
+
+# Define Zones
+def breakout_uts = if keyorderblock
+then 1 else 0;
+def breakdown_uts = if keyorderblock
+then 1 else 0;
+def uts_high = if breakdown_uts or breakout_uts then high else uts_high[1];
+def uts_low = if breakdown_uts or breakout_uts then low  else uts_low[1];
+def uts_length = if breakdown_uts or breakout_uts then 1 else uts_length[1] + 1;
+plot uts_hh = if limit_cloud_length == no or limit_cloud_length == yes and uts_length <= cloud_length then uts_high
+else Double.NaN;
+plot uts_ll = if limit_cloud_length == no or limit_cloud_length == yes and uts_length <= cloud_length then uts_low
+else Double.NaN;
+uts_hh.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+uts_ll.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+uts_hh.SetDefaultColor(Color.GRAY);
+uts_ll.SetDefaultColor(Color.GRAY);
+AddCloud(uts_hh, uts_ll, Color.CYAN, Color.CYAN);

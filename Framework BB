@@ -1,0 +1,23 @@
+# Framework BB
+# The bands are just 74.6% to 100% of the bollinger bands
+# Assembled by BenTen at useThinkScript.com
+# Partially converted from https://www.tradingview.com/script/oHPiOmhq-Framework-BB-TD9/
+
+input length = 200;
+input src = hlc3;
+input mult = 3.0;
+def dev = mult * stdev(src, length);
+def ema1 = expAverage(src, length);
+def ema2 = expAverage(ema1, length);
+def ema3 = expAverage(ema2, length);
+def out = 3 * (ema1 - ema2) + ema3;
+
+def upper_5 = out + (0.764* dev);
+def upper_6 = out + (1* dev);
+def lower_5 = out - (0.764* dev);
+def lower_6 = out - (1* dev);
+
+plot p5 = upper_5;
+plot p6 = upper_6;
+plot p17 = lower_5;
+plot p18 = lower_6;

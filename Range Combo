@@ -1,0 +1,63 @@
+# DeMark_Retracement_Levels
+# WalkingBallista
+#
+input aggregationPeriod = AggregationPeriod.DAY;
+
+def PH = high(period = aggregationPeriod);
+def PL = low(period = aggregationPeriod);
+def PO = open(period = aggregationPeriod);
+
+def range = PH[1] - PL[1];
+def a = range * 0.382;
+def b = range * 0.618;
+
+def h = PO + a;
+def h1 = PO + b;
+def l = PO - a;
+def l1 = PO - b;
+
+# Average Daily Range Zones
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/eHhGyI6R-CD-Average-Daily-Range-Zones-highs-and-lows-of-the-day/
+
+def dayrange = (PH - PL);
+
+def r1 = dayrange[1];
+def r2 = dayrange[2];
+def r3 = dayrange[3];
+def r4 = dayrange[4];
+def r5 = dayrange[5];
+def r6 = dayrange[6];
+def r7 = dayrange[7];
+def r8 = dayrange[8];
+def r9 = dayrange[9];
+def r10 = dayrange[10];
+
+def adr_10 = (r1 + r2 + r3 + r4 + r5 + r6 + r7 + r8 + r9 + r10) / 10;
+def adr_5 = (r1 + r2 + r3 + r4 + r5) / 5;
+
+def hl1 = (PO + (adr_10 / 2));
+def ll1 = (PO - (adr_10 / 2));
+def hl2 = (PO + (adr_5 / 2));
+def ll2 = (PO - (adr_5 / 2));
+
+plot t1 = (hl1 + h1) / 2;
+plot t2 = (h + hl2) / 2;
+plot b1 = (l + ll2) / 2;
+plot b2 = (l1 + ll1) / 2;
+
+addCloud(t1, t2, color.red, color.red);
+addCloud(b1, b2, color.green, color.green);
+
+t1.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+t1.SetDefaultColor(Color.DOWNTICK);
+t1.SetLineWeight(1);
+t2.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+t2.SetDefaultColor(Color.DOWNTICK);
+t2.SetLineWeight(1);
+b1.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+b1.SetDefaultColor(Color.UPTICK);
+b1.SetLineWeight(1);
+b2.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+b2.SetDefaultColor(Color.UPTICK);
+b2.SetLineWeight(1);

@@ -1,0 +1,14 @@
+# Dahl Oscillator
+# Converted by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/Qna3gMqE/
+
+declare lower;
+
+def DahlOscillator = expAverage((SimpleMovingAvg(close, 55) - SimpleMovingAvg(close[15], 55) - lowest(SimpleMovingAvg(close, 55) - SimpleMovingAvg(close[15], 55), 14)) / (highest(SimpleMovingAvg(close, 55) - SimpleMovingAvg(close[15], 55), 14) - (lowest(SimpleMovingAvg(close, 55) - SimpleMovingAvg(close[15], 55), 14))), 14) * 100;
+
+input over_Bought = 100;
+input over_Sold = 50;
+plot OverSold = over_Sold;
+plot OverBought = over_Bought;
+plot ZeroLine = 0;
+plot Dah = DahlOscillator;

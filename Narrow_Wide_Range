@@ -1,0 +1,15 @@
+# Narrow and Wide Candles Range
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/xT2BhcR7-CM-NarrowRange-WideRange-Bars-V1/
+
+input lb = 7;
+input lb2 = 7;
+
+def range = high - low;
+def lowRange = lowest(range[1], lb);
+def wideRange = highest(range[1], lb2);
+
+def narrow = range<lowRange;
+def wide = range > wideRange;
+
+assignPriceColor(if narrow then Color.MAGENTA else if wide then color.CYAN else Color.WHITE);

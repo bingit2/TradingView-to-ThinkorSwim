@@ -1,0 +1,30 @@
+# Previous Weekly_OHLC
+# Assembled by BenTen at useThinkScript.com
+
+input aggregationPeriod = AggregationPeriod.WEEK;
+
+def PH = high(period = aggregationPeriod)[1];
+def PL = low(period = aggregationPeriod)[1];
+def PC = close(period = aggregationPeriod)[1];
+def PO = open(period = aggregationPeriod)[1];
+
+plot previous_high = PH;
+plot previous_low = PL;
+plot previous_close = PC;
+plot previous_open = PO;
+
+previous_low.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+previous_low.SetDefaultColor(Color.MAGENTA);
+previous_low.SetLineWeight(1);
+
+previous_high.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+previous_high.SetDefaultColor(Color.CYAN);
+previous_high.SetLineWeight(1);
+
+previous_close.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+previous_close.SetDefaultColor(Color.WHITE);
+previous_close.SetLineWeight(1);
+
+previous_open.SetPaintingStrategy(PaintingStrategy.HORIZONTAL);
+previous_open.SetDefaultColor(Color.GREEN);
+previous_open.SetLineWeight(1);

@@ -1,0 +1,23 @@
+# D_ELI (Ehlers Leading Indicator)
+# Default set to Daily.
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/WqLnz0rr-D-ELI-Ehlers-Leading-Indicator/
+
+declare lower;
+
+input Length = 7;
+input Period = aggregationPeriod.DAY;
+
+def xHL2 = hl2(period = Period);
+
+def xEMA1 = expAverage(xHL2, Length);
+def xEMA2 = expAverage(xHL2, 2 * Length);
+def xEMA1_EMA2 = xEMA1 - xEMA2;
+def xResultEMA = expAverage(xEMA1_EMA2, Length);
+def nRes = xEMA1_EMA2 - xResultEMA;
+
+plot blue_line = xEMA1_EMA2;
+plot green_line = nRes;
+
+blue_line.SetDefaultColor(GetColor(1));
+green_line.SetDefaultColor(GetColor(6));

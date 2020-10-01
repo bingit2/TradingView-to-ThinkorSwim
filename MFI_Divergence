@@ -1,0 +1,34 @@
+# Money Flow Index Divergence Indicator
+# Assembled by BenTen at useThinkScript.com
+# Version 1.0
+
+# You are free to use this code for personal use, and make derivative works from it. You are NOT GRANTED permission to use this code (or derivative works) for commercial purposes which includes and is not limited to selling, reselling, or packaging with other commercial indicators. Headers and attribution in this code should remain as provided, and any derivative works should extend the existing headers.
+
+# 3 Bars Bullish Divergence
+def bullishMFI = MoneyFlowIndex(LENGTH = 14) > MoneyFlowIndex(LENGTH = 14)[1] AND MoneyFlowIndex(LENGTH = 14)[1] > MoneyFlowIndex(LENGTH = 14)[2] AND MoneyFlowIndex(LENGTH = 14)[2] > MoneyFlowIndex(LENGTH = 14)[3];
+def bullishPrice = CLOSE < CLOSE[1] AND CLOSE [1] < CLOSE [2] AND CLOSE [2] < CLOSE [3];
+plot bull3 = bullishMFI and bullishPrice;
+bull3.AssignValueColor(Color.MAGENTA);
+bull3.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_UP);
+
+# 3 Bars Bearish Divergence
+def bearishMFI = MoneyFlowIndex(LENGTH = 14) < MoneyFlowIndex(LENGTH = 14)[1] AND MoneyFlowIndex(LENGTH = 14)[1] < MoneyFlowIndex(LENGTH = 14)[2] AND MoneyFlowIndex(LENGTH = 14)[2] < MoneyFlowIndex(LENGTH = 14)[3];
+def bearishPrice = CLOSE > CLOSE[1] AND CLOSE [1] > CLOSE [2] AND CLOSE [2] > CLOSE [3];
+plot bear3 = bearishMFI and bearishPrice;
+bear3.AssignValueColor(Color.MAGENTA);
+bear3.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_DOWN);
+
+# 4 Bars Bullish Divergence
+def bullish4 = MoneyFlowIndex(LENGTH = 14) > MoneyFlowIndex(LENGTH = 14)[1] AND MoneyFlowIndex(LENGTH = 14)[1] > MoneyFlowIndex(LENGTH = 14)[2] AND MoneyFlowIndex(LENGTH = 14)[2] > MoneyFlowIndex(LENGTH = 14)[3] AND MoneyFlowIndex(LENGTH = 14)[3] > MoneyFlowIndex(LENGTH = 14)[4];
+def bullishPrice4 = CLOSE < CLOSE[1] AND CLOSE[1] < CLOSE[2] AND CLOSE[2] < CLOSE[3] AND CLOSE[4] < CLOSE[4];
+plot bull4 = bullish4 and bullishPrice4;
+bull4.AssignValueColor(Color.CYAN);
+bull4.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_UP);
+
+
+# 4 Bars Bearish Divergence
+def bearish4 = MoneyFlowIndex(LENGTH = 14) < MoneyFlowIndex(LENGTH = 14)[1] AND MoneyFlowIndex(LENGTH = 14)[1] < MoneyFlowIndex(LENGTH = 14)[2] AND MoneyFlowIndex(LENGTH = 14)[2] < MoneyFlowIndex(LENGTH = 14)[3] AND MoneyFlowIndex(LENGTH = 14)[3] < MoneyFlowIndex(LENGTH = 14)[4];
+def bearishPrice4 = CLOSE > CLOSE[1] AND CLOSE[1] > CLOSE[2] AND CLOSE[2] > CLOSE[3] AND CLOSE[3] > CLOSE[4];
+plot bear4 = bearish4 and bearishPrice4;
+bear4.AssignValueColor(Color.CYAN);
+bear4.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_DOWN);

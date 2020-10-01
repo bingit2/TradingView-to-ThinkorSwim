@@ -1,0 +1,18 @@
+# Effective Volume 2
+# Effective Volume that is trending up means accumulation (buying); if it is trend-ing down, that means distribution (selling). Look at the difference. Smart money is buying here, wait for pump, its coming! easy long! buy bottom!
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/1Bb84Koj-Effective-volume2/
+
+declare lower;
+
+def hi = if close[1] > high then close[1] else high;
+def lo = if close[1] < low then close[1] else low;
+def ad = if ((close[1]-close) + 0.01/(hi-lo) + 0.01 )* volume > volume*0.3 or((close[1]-close)+ 0.01/(hi-lo)+ 0.01)* volume< -(volume* 0.3) then((close[1]-close)/(hi-lo))* volume else Double.Nan;
+
+plot histogram = ad;
+plot ZeroLine = 0;
+
+histogram.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+histogram.SetLineWeight(3);
+
+Zeroline.SetDefaultColor(GetColor(0));

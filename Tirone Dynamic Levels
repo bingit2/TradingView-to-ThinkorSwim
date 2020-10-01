@@ -1,0 +1,29 @@
+# Tirone Dynamic Levels
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/ZdbzUf9B-Indicator-Tirone-Levels/
+
+input length = 20;
+
+def ll = lowest(low, length);
+def hh = highest(high, length);
+
+# Midpoint method
+def tlh = hh - ((hh - ll) / 3);
+def clh = ll + ((hh - ll) / 2);
+def blh = ll + ((hh - ll) / 3);
+# plot tl = tlh;
+# plot cl = clh;
+# plot bl = blh;
+
+# Mean method
+def am = (hh + ll + close) / 3;
+def eh = am + (hh - ll);
+def el = am - (hh - ll);
+def rh = 2 * am - ll;
+def rl = 2 * am - hh;
+
+plot one = eh;
+plot two = rh;
+plot three = am;
+plot four = rl;
+plot five = el;

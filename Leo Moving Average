@@ -1,0 +1,12 @@
+# Leo Moving Average
+# I were looking for and indicator that do not move so quickly as the Hull Moving Average but no lagging like exponential or weighted moving average, so I created my own in a very simple arithmetic way.
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/eU9pCDrk-Leo-Moving-Average/
+
+input length = 14;
+input src = close;
+
+def lma = 2 * wma(src, length) - simpleMovingAvg(src, length);
+plot leo_line = lma;
+
+AssignPriceColor(if lma > lma[1] then color.green else color.red);

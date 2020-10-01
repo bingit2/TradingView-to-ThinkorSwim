@@ -1,0 +1,13 @@
+# Supportive Volume Bars
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/TwBScdE4-Bull-Bear-Bars/
+
+input length = 21;
+
+def avrg = simpleMovingAvg(volume, length);
+
+def vold = volume > avrg * 1.5 and close<open;
+
+def volu = volume > avrg*1.5 and close>open;
+
+assignPriceColor(if vold then color.red else if volu then color.green else color.white);

@@ -1,0 +1,16 @@
+# Simple Trend and Strength
+# when strength > 0， it's a bullish signal. more the strength value bigger ,more bullish.
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/snpEtU2a-trend-strength/
+
+declare lower;
+
+input p = 20;
+def trend = expAverage(close, p);
+def strength = close - trend;
+
+plot line = strength;
+plot ZeroLine = 0;
+
+line.AssignValueColor(Color.CYAN);
+ZeroLine.AssignValueColor(Color.MAGENTA);

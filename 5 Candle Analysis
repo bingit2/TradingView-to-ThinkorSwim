@@ -1,0 +1,27 @@
+# 5 Candle Analysis
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/x4x217PY-5-Candle-Analysis/
+
+def candle1_Open = open[4];
+def candle1_Close = close[4];
+def candle2_Open = open[3];
+def candle2_Close = close[3];
+def candle3_Open = open[2];
+def candle3_Close = close[2];
+
+def candle4_Open = open[1];
+def candle4_Close = close[1];
+def candle5_Open = open;
+def candle5_Close = close;
+
+def isBullishTripleCandle = (candle1_Close > candle1_Open) and(candle2_Close > candle2_Open) and(candle3_Close >= candle3_Open) and(candle2_Close > candle1_Close);
+def engulfCandle3withCandle5NotCandle4 = (candle4_Close <= candle4_Open) and(candle4_Close >= candle3_Open) and(candle5_Close <= candle5_Open) and(candle5_Close<candle3_Open);
+
+def bearishReversalPredicted = isBullishTripleCandle and engulfCandle3withCandle5NotCandle4;
+
+def isBearishTripleCandle = (candle1_Close < candle1_Open) and(candle2_Close<candle2_Open) and(candle3_Close <= candle3_Open) and(candle2_Close<candle1_Close);
+def engulfCandle3withCandle5NotCandle4_1 = (candle4_Close >= candle4_Open) and(candle4_Close <= candle3_Open) and(candle5_Close >= candle5_Open) and(candle5_Close > candle3_Open);
+
+def bullishReversalPredicted = isBearishTripleCandle and engulfCandle3withCandle5NotCandle4_1;
+
+assignPriceColor(if bullishReversalPredicted then Color.Green else if bearishReversalPredicted then Color.Red else Color.White);

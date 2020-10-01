@@ -1,0 +1,20 @@
+# Triangular Moving Average (TMA) Bands
+# TMA uses EMA instead of swma. You have been warned
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/kPV0Kl8w-Triangular-Moving-Average-TMA-bands/
+
+input TMAPeriodBack = 35;
+input ATRPeriodBack = 75;
+input ATRMultiplier = 4.0;
+
+input src = close;
+
+def ssi = wma(src, TMAPeriodBack);
+def tma = expAverage(ssi);
+def range = atr(ATRPeriodBack) * ATRMultiplier;
+def tmah = tma + range;
+def tmal = tma - range;
+
+plot t1 = tmah;
+plot t2 = tma;
+plot t3 = tmal;

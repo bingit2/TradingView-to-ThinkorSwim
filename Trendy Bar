@@ -1,0 +1,6 @@
+# Trendy Bar
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/mQl3hyZ6-Trendy-Bar-Trend-Color/
+
+input src = hl2;
+assignPriceColor(if src > src[1] or close > close[1] then color.green else if src<src[1] or close<close[1] then color.red else color.white);

@@ -1,0 +1,24 @@
+# Price Equilibrium
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/fZZNjmT1-Price-Equilibrium/
+
+
+declare lower;
+
+input smaLength = 200;
+def distance = close - (expAverage(close, smaLength));
+def outline = simpleMovingAvg(distance, 1);
+
+plot diff = distance;
+
+Diff.SetDefaultColor(GetColor(5));
+Diff.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+Diff.SetLineWeight(3);
+
+Diff.DefineColor("red", Color.red);
+Diff.DefineColor("green", Color.green);
+
+Diff.AssignValueColor(if distance< 0 then Diff.color("red") else Diff.color("green"));
+
+plot ZeroLine = 0;
+plot movingLine = outline;

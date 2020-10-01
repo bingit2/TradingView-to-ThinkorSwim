@@ -1,0 +1,11 @@
+# Terl's Call the top
+# Default parameter were 3600. Changed to 360
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/nlzAG8Ji-Call-the-top/
+
+def top = open > 1.005 * high[1] and open > 0.98 * highest(open,360);
+
+plot bearish = top;
+bearish.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_DOWN);
+bearish.SetDefaultColor(Color.CYAN);
+bearish.SetLineWeight(3);

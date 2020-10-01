@@ -1,0 +1,12 @@
+# Wide Ranging Days
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/lpdD9eYT-Wideboy-Wide-Ranging-Days/
+
+input K = 2;
+input atrLookback = 15;
+def atr = atr(atrLookback);
+def dayRange = Max(close[1], high) - Min(close[1], low);
+
+def cond = dayRange > K * atr;
+
+assignPriceColor(if cond then color.blue else color.white);

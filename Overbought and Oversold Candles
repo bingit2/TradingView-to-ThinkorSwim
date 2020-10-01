@@ -1,0 +1,20 @@
+# Overbought and Oversold Candles
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/RLoA9E77/
+
+
+input n = 9;
+def ys1 = (high + low + close * 2) / 4;
+def rk3 = expAverage(ys1, n);
+def rk4 = stdev(ys1, n);
+def rk5 = (ys1 - rk3) * 100 / rk4;
+def rk6 = expAverage(rk5, n);
+def up = expAverage(rk6, n);
+def down = expAverage(up, n);
+def Oo = (up > down);
+def Ll = (down > up);
+
+def a = Oo[1] < Oo and Ll<Ll[1];
+def b = Oo[1] > Oo and Ll>Ll[1];
+
+assignPriceColor(if a then Color.Green else if b then color.red else color.white);

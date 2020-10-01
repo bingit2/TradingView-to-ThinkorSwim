@@ -1,0 +1,35 @@
+# MACD_VXI
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/WMxf5UKW-MACD-VXI/
+
+declare lower;
+
+input source = close;
+input fastLength = 13;
+input slowLength = 21;
+input signalLength = 8;
+def fastMA = expAverage(source, fastLength);
+def slowMA = expAverage(source, slowLength);
+def macd = fastMA - slowMA;
+def signal = simpleMovingAvg(macd, signalLength);
+def hist = macd - signal;
+
+plot diff = hist;
+plot signal1 = signal;
+plot signal2 = macd;
+plot ZeroLine = 0;
+
+plot UpSignal = if Diff crosses above ZeroLine then ZeroLine else Double.NaN;
+plot DownSignal = if Diff crosses below ZeroLine then ZeroLine else Double.NaN;
+
+Diff.SetDefaultColor(GetColor(9));
+Diff.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);
+Diff.SetLineWeight(3);
+
+signal1.setDefaultColor(getColor(0));
+signal2.setDefaultColor(getColor(1));
+
+UpSignal.SetDefaultColor(Color.UPTICK);
+UpSignal.SetPaintingStrategy(PaintingStrategy.ARROW_UP);
+DownSignal.SetDefaultColor(Color.DOWNTICK);
+DownSignal.SetPaintingStrategy(PaintingStrategy.ARROW_DOWN);

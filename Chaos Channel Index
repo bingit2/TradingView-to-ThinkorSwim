@@ -1,0 +1,16 @@
+# Chaos Channel Index
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/69UtAm44-Chaos-Channel-Index/
+
+declare lower;
+
+input length = 50;
+input src = close;
+input hund = 100;
+input neghund = -100;
+def ma = simpleMovingAvg(src, length);
+def cci = (src - ma) / (0.032 * stdev(src, length));
+
+plot line = cci;
+plot band0 = hund;
+plot band1 = neghund;

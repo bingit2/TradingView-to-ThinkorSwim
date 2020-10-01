@@ -1,0 +1,76 @@
+# Difference % between PRICE and VWAP
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/o0mHbrYo-Difference-between-PRICE-and-VWAP-V2/
+
+declare lower;
+
+input numDevDn = -2.0;
+input numDevUp = 2.0;
+input timeFrame = { default DAY, WEEK, MONTH };
+
+def cap = getAggregationPeriod();
+def errorInAggregation =
+    timeFrame == timeFrame.DAY and cap >= AggregationPeriod.WEEK or
+
+
+    timeFrame == timeFrame.WEEK and cap >= AggregationPeriod.MONTH;
+assert(!errorInAggregation, "timeFrame should be not less than current chart aggregation period");
+
+def yyyyMmDd = getYyyyMmDd();
+def periodIndx;
+switch (timeFrame) {
+case DAY:
+    periodIndx = yyyyMmDd;
+case WEEK:
+    periodIndx = Floor((daysFromDate(first(yyyyMmDd)) + getDayOfWeek(first(yyyyMmDd))) / 7);
+case MONTH:
+    periodIndx = roundDown(yyyyMmDd / 100, 0);
+}
+def isPeriodRolled = compoundValue(1, periodIndx != periodIndx[1], yes);
+
+def volumeSum;
+def volumeVwapSum;
+def volumeVwap2Sum;
+
+if (isPeriodRolled) {
+    volumeSum = volume;
+    volumeVwapSum = volume* vwap;
+volumeVwap2Sum = volume* Sqr(vwap);
+} else {
+    volumeSum = compoundValue(1, volumeSum[1] + volume, volume);
+volumeVwapSum = compoundValue(1, volumeVwapSum[1] + volume* vwap, volume* vwap);
+volumeVwap2Sum = compoundValue(1, volumeVwap2Sum[1] + volume* Sqr(vwap), volume* Sqr(vwap));
+}
+def price = volumeVwapSum / volumeSum;
+def deviation = Sqrt(Max(volumeVwap2Sum / volumeSum - Sqr(price), 0));
+
+def VWAP = price;
+def UpperBand = price + numDevUp * deviation;
+def LowerBand = price + numDevDn * deviation;
+
+input src = close;
+input len = 36;
+
+def xSMA = vwap;
+def nRes = absValue(src - xSMA) * 100 / src;
+
+def nRes3 = simpleMovingAvg(nRes, len);
+
+plot avg = nRes3;
+
+input level1 = 1.28;
+input level2 = 2.1;
+input level3 = 2.5;
+# input level4 = 3.09;
+# input level5 = 4.1;
+
+plot ZeroLine = 0;
+plot histogram = nRes;
+
+plot l1 = level1;
+plot l2 = level2;
+plot l3 = level3;
+# plot l4 = level4;
+# plot l5 = level5;
+
+histogram.SetPaintingStrategy(PaintingStrategy.HISTOGRAM);

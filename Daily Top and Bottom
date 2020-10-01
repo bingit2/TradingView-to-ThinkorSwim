@@ -1,0 +1,20 @@
+# Daily Top and Bottom
+# Used for big market cycles
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/WuaHCJEn-TOP-BOTTOM-Cycle-aamonkey/
+
+input psma_length = 200;
+input threshold = 2.4;
+input optimalbuy = 0.7;
+input optimalsell = 3.5;
+
+def ma = simpleMovingAvg(close, psma_length);
+def multiple = close / ma;
+
+def opt_sell_signal = multiple > optimalsell;
+def s_signal = multiple[1] > optimalsell and multiple<optimalsell;
+def opt_buy_signal = multiple < optimalbuy;
+def b_signal = multiple[1] < optimalbuy and multiple > optimalbuy;
+def sell_signal = multiple > threshold;
+
+assignPriceColor(if s_signal then Color.Red else if b_signal then Color.Green else if opt_sell_signal then Color.DARK_RED else if opt_buy_signal then color.DARK_GREEN else Color.WHITE);

@@ -1,0 +1,24 @@
+# Modified Illango Strategy
+# ThinkorSwim doesn't support "crosses below" for some reason. So this indicator only highlight buy entry. No exit or short.
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/9jjsikVz/
+
+declare lower;
+
+def High35 = highest(high, 35);
+def Low35 = lowest(low, 35);
+def perHK = ((close - Low35) / (High35 - Low35)) * 100;
+def AvgHK = simpleMovingAvg(perHK, 3);
+def EMAHK = simpleMovingAvg(expAverage(AvgHK, 9), 9);
+def diff = AvgHK - EMAHK;
+
+def line1 = EMAHK;
+def line2 = AvgHK;
+
+plot lineA = line1;
+plot lineB = line2;
+
+def entry = AvgHK crosses above EMAHK and diff>1 and AvgHK>5 and AvgHK<45 and EMAHK>5 and EMAHK<45;
+def exit = EMAHK crosses below AvgHK and diff<-1 and AvgHK>55 and AvgHK<95 and EMAHK>55 and EMAHK<95;
+
+assignPriceColor(if entry then Color.Green else if exit then Color.Red else Color.White);

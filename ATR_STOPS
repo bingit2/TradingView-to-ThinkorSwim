@@ -1,0 +1,18 @@
+# ATR Trailing Stops
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/Wk0Emy0u-ATR-Stops/
+
+input nATRPeriod = 14;
+input nATRMultip = 2;
+
+def xATR = atr(nATRPeriod);
+def nLoss = nATRMultip * xATR;
+
+def xATRTrailingStopUpper = open + nLoss;
+def xATRTrailingStopLower = open - nLoss;
+
+plot sell_stop = xATRTrailingStopUpper;
+plot buy_stop = xATRTrailingStopLower;
+
+sell_stop.SetDefaultColor(GetColor(0));
+buy_stop.SetDefaultColor(GetColor(1));

@@ -1,0 +1,18 @@
+# Trend Channel
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/nApbXCts-Trend-Channel-Gu5/
+
+input src = close;
+input smaL = 200;
+input lrange = 0.618;
+input mrange = 100;
+
+def chTop = simpleMovingAvg(src, smaL) * ((lrange / mrange) + 1);
+def chBottom = simpleMovingAvg(src, smaL) * (1 - (lrange / mrange));
+
+def SMAtr = simpleMovingAvg(src, smaL);
+def range = ((open <= chTop) or(close <= chTop)) and((open >= chBottom) or(close >= chBottom));
+
+plot sma200 = SMAtr;
+
+assignPriceColor(if range then Color.Orange else if src > SMAtr then Color.Green else if src<SMAtr then Color.Red else Color.White);

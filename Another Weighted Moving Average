@@ -1,0 +1,23 @@
+# Another Weighted Moving Average
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/IAssyObN-MavilimW/
+
+input fmal1 = 3;
+input smal1 = 5;
+
+def tmal = fmal1 + smal1;
+def Fmal = smal1 + tmal;
+def Ftmal = tmal + Fmal;
+def Smal = Fmal + Ftmal;
+
+def M1 = wma(close, fmal);
+def M2 = wma(M1, smal);
+def M3 = wma(M2, tmal);
+def M4 = wma(M3, Fmal);
+def M5 = wma(M4, Ftmal);
+def MAVW = wma(M5, Smal);
+def col1 = MAVW > MAVW[1];
+def col3 = MAVW < MAVW[1];
+
+plot a = MAVW;
+a.AssignValueColor(if col1 then color.blue else if col3 then color.red else color.yellow);

@@ -1,0 +1,12 @@
+# Spread Analyzer
+# Thanks AlphaInvestor (Bid Ask Script) and WalkingBallista (DMI Range Script)
+# Assembled by BenTen at useThinkScript.com
+
+declare lower;
+
+def bid = close(priceType = PriceType.BID);
+def ask = close(priceType = PriceType.ASK);
+
+plot range = AbsValue(AbsValue(ask)-AbsValue(bid));
+
+addLabel(yes, "Spread: " + range, Color.WHITE);

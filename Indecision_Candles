@@ -1,0 +1,8 @@
+# Indecision Candle Identifier
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/y33oWhlY-Indecision-Candle-Identifier/
+
+def bear = close[1] > open[1] and open > close and open <= close[1] and open[1] <= close and open - close<close[1] - open[1];
+def bull = open[1] > close[1] and close > open and close <= open[1] and close[1] <= open and close - open<open[1] - close[1];
+
+assignPriceColor(if bull then Color.Green else if Bear then Color.Red else Color.WHITE);

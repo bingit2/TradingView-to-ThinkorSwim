@@ -1,0 +1,8 @@
+# Pivot System
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/cs02Zwun/
+
+def pivbuy = low[1] < low[2] and low > low[1] and high[1] < high[2] and high > high[1] and close > close[2];
+def pivsell = high[1] > high[2] and high<high[1] and low[1] > low[2] and low<low[1] and close<close[2];
+
+assignPriceColor(if pivbuy then color.green else if pivsell then color.red else color.white);

@@ -1,0 +1,19 @@
+# Maximum ATR Bands
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/CpdaeKFe-Maximum-ATR-Bands/
+
+input len = 24;
+input mult = 1.5;
+
+def atr = atr(len);
+def atr_max = highest(atr, len);
+def upper_band = atr_max * mult + open;
+def lower_band = open - atr_max * mult;
+
+plot u = upper_band;
+plot l = lower_band;
+
+addCloud(u, l, color.lime, color.lime);
+
+u.SetDefaultColor(GetColor(1));
+l.SetDefaultColor(GetColor(0));

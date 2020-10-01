@@ -1,0 +1,18 @@
+# Psychology Index
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/REqB7IMp/
+
+declare lower;
+
+input LookBack = 12;
+input UThreshold = 75;
+input LThreshold = 25;
+input Midline = 50;
+def UpDay = if(close > close[1],1,0);
+def PsychIndex = sum(UpDay, LookBack) / LookBack * 100;
+
+plot Index = PsychIndex;
+
+plot Upper = UThreshold;
+plot Lower = LThreshold;
+plot Mid = Midline;

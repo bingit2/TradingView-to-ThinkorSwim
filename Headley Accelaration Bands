@@ -1,0 +1,17 @@
+# Price Headley Accelaration Bands
+# Assembled by BenTen at useThinkScript.com
+# Converted from https://www.tradingview.com/script/wM2yTTOq-Indicator-Price-Headley-Accelaration-Bands-LazyBear/
+
+input length = 20;
+def ub = (high * (1 + 2 * ((((high - low) / ((high + low) / 2)) * 1000) * 0.001)));
+def su = simpleMovingAvg(ub, length);
+def lb = (low * (1 - 2 * ((((high - low) / ((high + low) / 2)) * 1000) * 0.001)));
+def sl = simpleMovingAvg(lb, length);
+
+plot u = su;
+plot l = sl;
+
+addCloud(u, l, color.lime, color.lime);
+
+u.SetDefaultColor(GetColor(1));
+l.SetDefaultColor(GetColor(0));
